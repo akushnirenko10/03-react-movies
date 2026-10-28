@@ -1,12 +1,12 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import SearchBar from "../SearchBar/SearchBar";
 import getMovies from "../../services/movieService";
 import type { Movie } from "../../types/movie";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import MovieModal from "../MovieModal/MovieModal";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -19,6 +19,7 @@ export default function App() {
 
   const handleSearch = async (query: string) => {
     try {
+      setIsError(false);
       setMovies([]);
       setIsLoading(true);
       const data = await getMovies(query);
